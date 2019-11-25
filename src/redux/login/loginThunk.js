@@ -3,7 +3,6 @@ import * as AC from "./loginActions";
 
 export const loginingThunk = (username, password) => dispatch => {
   dispatch(AC.fetchingNowAC(true));
-  console.log(555);
 
   loginPageAPI
     .postLigin(username, password)

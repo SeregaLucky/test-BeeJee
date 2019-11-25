@@ -9,8 +9,6 @@ import styles from "./LoginPage.module.css";
 /* import - selectors */
 import loginSelectors from "../../redux/login/loginSelectors";
 /* import - THUNK */
-// import { loginingThunk } from "../../redux/login/loginReducer2";
-// import { loginingThunk } from "../../redux/login/loginReducer";
 import { loginingThunk } from "../../redux/login/loginThunk";
 /* import - COMPONENT */
 
@@ -31,18 +29,12 @@ class LoginPage extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    // console.log(111);
     const { isError, makedMistake } = this.props;
 
-    // console.log(prevProps.makedMistake);
-    // console.log(makedMistake);
-
     if (isError && prevProps.isError !== isError) this.errorShow();
-    // if (isError) this.errorShow();
 
     if (makedMistake && prevProps.makedMistake !== makedMistake)
       this.makedMistake(makedMistake.makedMistake);
-    // if (makedMistake) this.makedMistake(makedMistake);
   }
 
   handleChange = ({ target }) => {
@@ -57,17 +49,12 @@ class LoginPage extends Component {
     const { loginingThunk } = this.props;
     const { login, password } = this.state;
 
-    console.log(this.state);
-
     if (login.length === 0 || password.length === 0) {
-      console.log("Все поля обезательные");
       this.missingField();
       return;
     }
 
-    console.log("loginingThunk");
     loginingThunk(login, password);
-    // Ввести данные “admin” в поле для имени и “123” в поле для пароля
   };
 
   missingField = () => {
@@ -90,7 +77,6 @@ class LoginPage extends Component {
     const { loginToken, fetchingNow } = this.props;
     const { login, password } = this.state;
     const { loginInputId, passwordInputId } = this.inputIds;
-    // console.log(fetchingNow);
 
     return (
       <section className={styles.section}>
