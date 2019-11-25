@@ -11,24 +11,28 @@ const HomePage = ({
   listTasks,
   totalCountTasks,
   loginToken,
+  fetchingNow,
+  finishToken,
+  happenedError,
   getTasksThunk,
   changeTaskThunk
-}) => {
-  return (
-    <>
-      <ListTasks
-        listTasks={listTasks}
-        loginToken={loginToken}
-        getTasksThunk={getTasksThunk}
-        changeTaskThunk={changeTaskThunk}
-      />
+}) => (
+  <>
+    <ListTasks
+      listTasks={listTasks}
+      loginToken={loginToken}
+      fetchingNow={fetchingNow}
+      finishToken={finishToken}
+      happenedError={happenedError}
+      getTasksThunk={getTasksThunk}
+      changeTaskThunk={changeTaskThunk}
+    />
 
-      <Paginator
-        totalCountTasks={totalCountTasks}
-        getTasksThunk={getTasksThunk}
-      />
-    </>
-  );
-};
+    <Paginator
+      totalCountTasks={totalCountTasks}
+      getTasksThunk={getTasksThunk}
+    />
+  </>
+);
 
 export default HomePage;

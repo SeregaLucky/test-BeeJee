@@ -1,22 +1,12 @@
 import { combineReducers } from "redux";
+import * as types from "./homePageTypes";
 
-import { homePageAPI } from "../../api/api";
-
-const GET_TASKS = "ADD_NEW_TASK";
-const CHANGE_TACK = "CHANGE_TACK";
-const GET_COUNT_TASKS = "GET_COUNT_TASKS";
-
-/*
- * REDUCER
- */
 const listReducer = (state = [], { type, payload }) => {
   switch (type) {
-    case GET_TASKS:
-      console.log(payload.tasks);
+    case types.GET_TASKS:
       return [...payload.tasks];
 
-    case CHANGE_TACK:
-      // console.log(state);
+    case types.CHANGE_TACK:
       return state.map(task =>
         task.id === payload.id
           ? { ...task, text: payload.text, status: payload.status }
@@ -30,8 +20,7 @@ const listReducer = (state = [], { type, payload }) => {
 
 const totalTasksCountReducer = (state = 1, { type, payload }) => {
   switch (type) {
-    case GET_COUNT_TASKS:
-      // console.log(payload.count);
+    case types.GET_COUNT_TASKS:
       return payload.count;
 
     default:
@@ -39,75 +28,40 @@ const totalTasksCountReducer = (state = 1, { type, payload }) => {
   }
 };
 
-/*
- * ACTIONS
- */
-export const getTasksAC = tasks => ({
-  type: GET_TASKS,
+const fetchingNowReducer = (state = false, { type, payload }) => {
+  switch (type) {
+    case types.FETCHING_NOW:
+      return payload.fetchingNow;
 
-  payload: {
-    tasks
+    default:
+      return state;
   }
-});
-
-export const changeTaskAC = (id, text, status) => ({
-  type: CHANGE_TACK,
-
-  payload: {
-    id,
-    text,
-    status
-  }
-});
-
-export const getCountTasksAC = count => ({
-  type: GET_COUNT_TASKS,
-
-  payload: {
-    count
-  }
-});
-
-/*
- * THUNK
- */
-export const getTasksThunk = (page, sort_field, sort_direction) => dispatch => {
-  // console.log(page);
-  // console.log(sort_field);
-  // console.log(sort_direction);
-
-  homePageAPI
-    .getTasks(page, sort_field, sort_direction)
-    .then(res => {
-      // console.log(res);
-      // console.log(res.message);
-
-      dispatch(getTasksAC(res.message.tasks));
-      dispatch(getCountTasksAC(res.message.total_task_count));
-    })
-    .catch(err => console.log(err));
-  // .finally();
 };
 
-export const changeTaskThunk = (id, text, status, token) => dispatch => {
-  status = status ? 10 : 0;
+const finishTokenReducer = (state = null, { type, payload }) => {
+  switch (type) {
+    case types.FINISH_TOKEN:
+      return payload.makedMistake;
 
-  homePageAPI
-    .changeTask(id, text, status, token)
-    .then(res => {
-      // console.log(res);
+    default:
+      return state;
+  }
+};
 
-      // console.log(id);
-      // console.log(text);
-      // console.log(status);
+const happenedErrorReducer = (state = null, { type, payload }) => {
+  switch (type) {
+    case types.HAPPENED_ERROR:
+      return payload.isError;
 
-      dispatch(changeTaskAC(id, text, status));
-    })
-    .catch(err => console.log(err));
-  // .finally();
+    default:
+      return state;
+  }
 };
 
 export default combineReducers({
   items: listReducer,
-  totalCountTasks: totalTasksCountReducer
+  totalCountTasks: totalTasksCountReducer,
+  fetchingNow: fetchingNowReducer,
+  finishToken: finishTokenReducer,
+  happenedError: happenedErrorReducer
 });

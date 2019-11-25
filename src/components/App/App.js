@@ -12,23 +12,18 @@ import FormPage from "../../page/FormPage/FormPage";
 /*
  * COMPONENT
  */
-const App = () => {
-  return (
-    <BrowserRouter>
-      <Navigation />
+const App = () => (
+  <BrowserRouter>
+    <Navigation />
 
-      <Switch>
-        <Route exact path={routes.HOME_PAGE} component={HomePageContainer} />
-        <Route path={routes.LOGIN_PAGE} component={LoginPage} />
-        <Route path={routes.FORM_PAGE} component={FormPage} />
+    <Switch>
+      <Route exact path={routes.HOME_PAGE} component={HomePageContainer} />
+      <Route path={routes.LOGIN_PAGE} component={LoginPage} />
+      <Route path={routes.FORM_PAGE} component={FormPage} />
 
-        <Redirect to={routes.HOME_PAGE} />
-      </Switch>
-    </BrowserRouter>
-  );
-};
+      <Redirect to={routes.HOME_PAGE} />
+    </Switch>
+  </BrowserRouter>
+);
 
 export default App;
-
-// /* import - CSS */
-// import styles from "./App.module.css";

@@ -5,19 +5,14 @@ import ReactPaginate from "react-paginate";
 /* import - CSS */
 import styles from "./Paginator.module.css";
 
-// https://www.npmjs.com/package/react-paginate
-// https://github.com/AdeleD/react-paginate/blob/master/demo/js/demo.js
-
 /*
  * COMPONENT
  */
 class Paginator extends Component {
-  componentDidMount() {}
-
   handlePageClick = data => {
-    const page = data.selected + 1;
-
     const { history, location, getTasksThunk } = this.props;
+
+    const page = data.selected + 1;
 
     const sortField = new URLSearchParams(location.search).get("sort_field");
     const sortDirection = new URLSearchParams(location.search).get(
@@ -45,10 +40,7 @@ class Paginator extends Component {
   };
 
   render() {
-    // console.log("props Paginator", this.props);
-
     const { totalCountTasks } = this.props;
-
     const pageCount = Math.ceil(Number(totalCountTasks) / 3);
 
     return (
@@ -57,12 +49,10 @@ class Paginator extends Component {
         nextLabel={"next"}
         breakLabel={"..."}
         breakClassName={"break-me"}
-        // pageCount={this.state.pageCount} // Общее количество страниц.
         pageCount={pageCount} // Общее количество страниц.
         marginPagesDisplayed={2} // Количество страниц для отображения полей.
         pageRangeDisplayed={5} // диапазон отображаймых страниц
         onPageChange={this.handlePageClick}
-        // containerClassName={"pagination"}
         containerClassName={styles.pagination}
         subContainerClassName={"pages pagination"}
         activeClassName={styles.linkActive}

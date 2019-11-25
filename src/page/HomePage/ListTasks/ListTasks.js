@@ -1,21 +1,33 @@
 /* import - node_modules */
 import React, { Component } from "react";
+import { toast } from "react-toastify";
 /* import - CSS */
+import "react-toastify/dist/ReactToastify.css";
 import styles from "./ListTasks.module.css";
+
+toast.configure();
 
 /*
  * COMPONENT
  */
 class ListTasks extends Component {
   state = {
-    // isEdit: false,
-    // arrayNowEdit: null,
-
     idNowEdit: null,
-
     text: "",
     status: null
   };
+
+  componentDidUpdate(prevProps) {
+    const { happenedError, finishToken } = this.props;
+
+    /* Предупреждение об ошибке */
+    if (happenedError && prevProps.happenedError !== happenedError)
+      this.errorShow();
+
+    /* Предупреждение об что закончился токен */
+    if (finishToken && prevProps.finishToken !== finishToken)
+      this.finishToken();
+  }
 
   handleClick = (id, text, status) => {
     const { idNowEdit } = this.state;
@@ -49,65 +61,80 @@ class ListTasks extends Component {
     changeTaskThunk(idNowEdit, text, status, loginToken);
   };
 
-  render() {
-    const { listTasks, loginToken } = this.props;
-    const { idNowEdit, text, status } = this.state;
+  finishToken = () => {
+    toast.warn("Токен истёк", {
+      position: toast.POSITION.BOTTOM_RIGHT
+    });
+  };
+  errorShow = () => {
+    toast.error("Произошла ошибка... Попробуйте позде", {
+      position: toast.POSITION.BOTTOM_RIGHT
+    });
+  };
 
-    // console.log(loginToken);
+  render() {
+    const { listTasks, loginToken, fetchingNow } = this.props;
+    const { idNowEdit, text, status } = this.state;
     return (
       <>
         {listTasks.length > 0 && (
           <ul className={styles.list}>
             {listTasks.map(task => (
               <li key={task.id} className={styles.item}>
-                {/* <img src={task.image_path} alt="avatar" /> */}
+                <div className={styles.photo}>
+                  <img src={task.image_path} alt="avatar" />
+                </div>
 
-                <p>
-                  <b>Имя:</b> {task.username}
-                </p>
-                <p>
-                  <b>E-mail:</b> {task.email}
-                </p>
-                <p>
-                  <b>Задача:</b> {task.text}
-                </p>
+                <div className={styles.rigthContent}>
+                  <p>
+                    <b>Имя:</b> {task.username}
+                  </p>
+                  <p>
+                    <b>E-mail:</b> {task.email}
+                  </p>
+                  <p>
+                    <b>Задача:</b> {task.text}
+                  </p>
 
-                <p>
-                  <b>Статус задачи:</b>{" "}
-                  {task.status === 10 ? "Выполнен" : "В процессе"}
-                </p>
+                  <p>
+                    <b>Статус задачи:</b>{" "}
+                    {task.status === 10 ? "Выполнен" : "В процессе"}
+                  </p>
 
-                {loginToken && (
-                  <button
-                    type="button"
-                    onClick={() =>
-                      this.handleClick(task.id, task.text, task.status)
-                    }
-                  >
-                    {idNowEdit ? "Отмена" : "Редактировать"}
-                  </button>
-                )}
+                  {loginToken && (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        this.handleClick(task.id, task.text, task.status)
+                      }
+                    >
+                      {idNowEdit ? "Отмена" : "Редактировать"}
+                    </button>
+                  )}
 
-                {/* FORM CHANGE */}
-                {idNowEdit === task.id && (
-                  <form onSubmit={this.handleSubmit}>
-                    <input
-                      type="text"
-                      name="text"
-                      value={text}
-                      onChange={this.handleChange}
-                    />
+                  {/* FORM CHANGE */}
+                  {idNowEdit === task.id && (
+                    <form onSubmit={this.handleSubmit}>
+                      <input
+                        type="text"
+                        name="text"
+                        value={text}
+                        onChange={this.handleChange}
+                      />
 
-                    <input
-                      type="checkbox"
-                      name="status"
-                      checked={status}
-                      onChange={this.handleChange}
-                    />
+                      <input
+                        type="checkbox"
+                        name="status"
+                        checked={status}
+                        onChange={this.handleChange}
+                      />
 
-                    <button type="submit">Отправить</button>
-                  </form>
-                )}
+                      <button type="submit" disabled={fetchingNow}>
+                        Отправить
+                      </button>
+                    </form>
+                  )}
+                </div>
               </li>
             ))}
           </ul>
@@ -118,40 +145,3 @@ class ListTasks extends Component {
 }
 
 export default ListTasks;
-
-//
-//
-//
-//
-
-// const ListTasks = ({ listTasks, loginToken }) => {
-//   console.log(loginToken);
-//   return (
-//     <>
-//       {listTasks.length > 0 && (
-//         <ul>
-//           {listTasks.map(task => (
-//             <li key={task.id}>
-//               {/* <img src={task.image_path} alt="avatar" /> */}
-
-//               <p>Имя: {task.username}</p>
-//               <p>e-mail: {task.email}</p>
-//               <p>Задача: {task.text}</p>
-
-//               {loginToken && <button>Редактировать</button>}
-
-//               <p>
-//                 Статус задачи: {task.status === 10 ? "Выполнен" : "В процессе"}
-//               </p>
-//               {/* <input type="checkbox" checked={task.text.status === 10} /> */}
-
-//               <hr />
-//             </li>
-//           ))}
-//         </ul>
-//       )}
-//     </>
-//   );
-// };
-
-// export default ListTasks;

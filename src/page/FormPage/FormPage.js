@@ -10,7 +10,6 @@ import styles from "./FormPage.module.css";
 import formSelectors from "../../redux/form/formSelectors";
 /* import - THUNK */
 import { addNewTaskThunk } from "../../redux/form/formThunk";
-/* import - COMPONENT */
 
 toast.configure();
 

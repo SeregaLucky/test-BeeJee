@@ -10,7 +10,6 @@ import styles from "./LoginPage.module.css";
 import loginSelectors from "../../redux/login/loginSelectors";
 /* import - THUNK */
 import { loginingThunk } from "../../redux/login/loginThunk";
-/* import - COMPONENT */
 
 toast.configure();
 
@@ -29,9 +28,10 @@ class LoginPage extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    const { isError, makedMistake } = this.props;
+    const { happenedError, makedMistake } = this.props;
 
-    if (isError && prevProps.isError !== isError) this.errorShow();
+    if (happenedError && prevProps.happenedError !== happenedError)
+      this.errorShow();
 
     if (makedMistake && prevProps.makedMistake !== makedMistake)
       this.makedMistake(makedMistake.makedMistake);
