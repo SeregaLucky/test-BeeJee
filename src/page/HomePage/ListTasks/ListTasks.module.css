@@ -1,0 +1,15 @@
+.list {
+  margin: 0 0 20px 0;
+}
+.item {
+  width: 70%;
+  background: #fff;
+  box-shadow: 0 5px 15px 0 rgba(110, 110, 110, 0.1);
+  border-radius: 6px;
+  padding: 20px 30px;
+  margin: 0 auto;
+}
+
+.item:not(:last-child) {
+  margin-bottom: 30px;
+}
