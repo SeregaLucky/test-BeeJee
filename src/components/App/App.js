@@ -1,8 +1,6 @@
 /* import - node_modules */
 import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-/* import - CSS */
-import styles from "./App.module.css";
 /* import - routes */
 import routes from "../../routes";
 /* import - COMPONENT */
@@ -24,10 +22,13 @@ const App = () => {
         <Route path={routes.LOGIN_PAGE} component={LoginPage} />
         <Route path={routes.FORM_PAGE} component={FormPage} />
 
-        {/* <Redirect to=path={routes.HOME_PAGE} /> */}
+        <Redirect to={routes.HOME_PAGE} />
       </Switch>
     </BrowserRouter>
   );
 };
 
 export default App;
+
+// /* import - CSS */
+// import styles from "./App.module.css";
