@@ -11,5 +11,5 @@ export default {
   getIsfetching,
   getFinishToken,
   getError,
-  getLoginToken
+  getLoginToken,
 };

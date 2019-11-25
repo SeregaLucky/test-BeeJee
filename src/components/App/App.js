@@ -1,13 +1,13 @@
 /* import - node_modules */
-import React from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 /* import - routes */
-import routes from "../../routes";
+import routes from '../../routes';
 /* import - COMPONENT */
-import HomePageContainer from "../../page/HomePage/HomePageContainer";
-import LoginPage from "../../page/LoginPage/LoginPage";
-import Navigation from "../Navigation/Navigation";
-import FormPage from "../../page/FormPage/FormPage";
+import HomePageContainer from '../../page/HomePage/HomePageContainer';
+import LoginPage from '../../page/LoginPage/LoginPage';
+import Navigation from '../Navigation/Navigation';
+import FormPage from '../../page/FormPage/FormPage';
 
 /*
  * COMPONENT

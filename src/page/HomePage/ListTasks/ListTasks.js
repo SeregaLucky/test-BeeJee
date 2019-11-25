@@ -1,9 +1,10 @@
 /* import - node_modules */
-import React, { Component } from "react";
-import { toast } from "react-toastify";
+import React, { Component } from 'react';
+import { toast } from 'react-toastify';
+import T from 'prop-types';
 /* import - CSS */
-import "react-toastify/dist/ReactToastify.css";
-import styles from "./ListTasks.module.css";
+import 'react-toastify/dist/ReactToastify.css';
+import styles from './ListTasks.module.css';
 
 toast.configure();
 
@@ -11,10 +12,35 @@ toast.configure();
  * COMPONENT
  */
 class ListTasks extends Component {
+  static defaultProps = {
+    happenedError: null,
+    finishToken: null,
+    loginToken: null,
+  };
+
+  static propTypes = {
+    happenedError: T.shape(),
+    finishToken: T.shape(),
+    loginToken: T.string,
+    listTasks: T.arrayOf(
+      T.shape({
+        id: T.number.isRequired,
+        image_path: T.string,
+        username: T.string.isRequired,
+        email: T.string.isRequired,
+        text: T.string.isRequired,
+        status: T.number.isRequired,
+      }),
+    ).isRequired,
+
+    fetchingNow: T.bool.isRequired,
+    changeTaskThunk: T.func.isRequired,
+  };
+
   state = {
     idNowEdit: null,
-    text: "",
-    status: null
+    text: '',
+    status: null,
   };
 
   componentDidUpdate(prevProps) {
@@ -36,8 +62,8 @@ class ListTasks extends Component {
       this.setState({
         idNowEdit: id,
 
-        text: text,
-        status: status === 10
+        text,
+        status: status === 10,
       });
 
       return;
@@ -49,7 +75,7 @@ class ListTasks extends Component {
   handleChange = ({ target }) => {
     const { name, value, type, checked } = target;
 
-    this.setState({ [name]: type === "checkbox" ? checked : value });
+    this.setState({ [name]: type === 'checkbox' ? checked : value });
   };
 
   handleSubmit = e => {
@@ -62,13 +88,14 @@ class ListTasks extends Component {
   };
 
   finishToken = () => {
-    toast.warn("Токен истёк", {
-      position: toast.POSITION.BOTTOM_RIGHT
+    toast.warn('Токен истёк', {
+      position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
+
   errorShow = () => {
-    toast.error("Произошла ошибка... Попробуйте позде", {
-      position: toast.POSITION.BOTTOM_RIGHT
+    toast.error('Произошла ошибка... Попробуйте позде', {
+      position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
 
@@ -97,8 +124,8 @@ class ListTasks extends Component {
                   </p>
 
                   <p>
-                    <b>Статус задачи:</b>{" "}
-                    {task.status === 10 ? "Выполнен" : "В процессе"}
+                    <b>Статус задачи:</b>{' '}
+                    {task.status === 10 ? 'Выполнен' : 'В процессе'}
                   </p>
 
                   {loginToken && (
@@ -108,7 +135,7 @@ class ListTasks extends Component {
                         this.handleClick(task.id, task.text, task.status)
                       }
                     >
-                      {idNowEdit ? "Отмена" : "Редактировать"}
+                      {idNowEdit ? 'Отмена' : 'Редактировать'}
                     </button>
                   )}
 

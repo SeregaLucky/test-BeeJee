@@ -1,25 +1,25 @@
-import * as types from "./formTypes";
+import * as types from './formTypes';
 
 export const addNewTaskAC = task => ({
   type: types.ADD_NEW_TASK,
 
   payload: {
-    task
-  }
+    task,
+  },
 });
 
 export const fetchingNowAC = fetchingNow => ({
   type: types.FETCHING_NOW,
 
   payload: {
-    fetchingNow
-  }
+    fetchingNow,
+  },
 });
 
 export const happenedErrorAC = isError => ({
   type: types.HAPPENED_ERROR,
 
   payload: {
-    isError: { isError }
-  }
+    isError: { isError },
+  },
 });

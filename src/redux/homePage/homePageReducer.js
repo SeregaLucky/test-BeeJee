@@ -1,5 +1,5 @@
-import { combineReducers } from "redux";
-import * as types from "./homePageTypes";
+import { combineReducers } from 'redux';
+import * as types from './homePageTypes';
 
 const listReducer = (state = [], { type, payload }) => {
   switch (type) {
@@ -10,7 +10,7 @@ const listReducer = (state = [], { type, payload }) => {
       return state.map(task =>
         task.id === payload.id
           ? { ...task, text: payload.text, status: payload.status }
-          : task
+          : task,
       );
 
     default:
@@ -63,5 +63,5 @@ export default combineReducers({
   totalCountTasks: totalTasksCountReducer,
   fetchingNow: fetchingNowReducer,
   finishToken: finishTokenReducer,
-  happenedError: happenedErrorReducer
+  happenedError: happenedErrorReducer,
 });

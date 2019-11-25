@@ -1,20 +1,27 @@
 /* import - node_modules */
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import T from 'prop-types';
 /* import - CSS */
-import styles from "./Filter.module.css";
+import styles from './Filter.module.css';
 
 class Filter extends Component {
+  static propTypes = {
+    location: T.shape().isRequired,
+    history: T.shape().isRequired,
+    getTasksThunk: T.func.isRequired,
+  };
+
   state = {
-    fieldSort: ""
+    fieldSort: '',
   };
 
   componentDidMount() {
     const { location, getTasksThunk } = this.props;
 
     /* Находим параметры запроса */
-    const page = this.findParams(location.search).page;
-    const sortField = this.findParams(location.search).sortField;
-    const sortDirection = this.findParams(location.search).sortDirection;
+    const { page } = this.findParams(location.search);
+    const { sortField } = this.findParams(location.search);
+    const { sortDirection } = this.findParams(location.search);
 
     if (sortField && sortDirection) {
       const fieldSort = `&sort_field=${sortField}&sort_direction=${sortDirection}`;
@@ -54,9 +61,9 @@ class Filter extends Component {
       .sortDirection;
 
     /* Находим параметры запроса */
-    const page = this.findParams(location.search).page;
-    const sortField = this.findParams(fieldSort).sortField;
-    const sortDirection = this.findParams(fieldSort).sortDirection;
+    const { page } = this.findParams(location.search);
+    const { sortField } = this.findParams(fieldSort);
+    const { sortDirection } = this.findParams(fieldSort);
 
     if (sortFieldPrev === sortField && sortDirectionPrev === sortDirection)
       return;
@@ -66,7 +73,7 @@ class Filter extends Component {
 
       history.push({
         ...location,
-        search: `sort_field=${sortField}&sort_direction=${sortDirection}`
+        search: `sort_field=${sortField}&sort_direction=${sortDirection}`,
       });
 
       return;
@@ -75,18 +82,17 @@ class Filter extends Component {
     if (page) {
       history.push({
         ...location,
-        search: `page=${page}&sort_field=${sortField}&sort_direction=${sortDirection}`
+        search: `page=${page}&sort_field=${sortField}&sort_direction=${sortDirection}`,
       });
 
       getTasksThunk(page, sortField, sortDirection);
-      return;
     }
   }
 
   findParams = params => {
-    const page = new URLSearchParams(params).get("page");
-    const sortField = new URLSearchParams(params).get("sort_field");
-    const sortDirection = new URLSearchParams(params).get("sort_direction");
+    const page = new URLSearchParams(params).get('page');
+    const sortField = new URLSearchParams(params).get('sort_field');
+    const sortDirection = new URLSearchParams(params).get('sort_direction');
 
     return { page, sortField, sortDirection };
   };

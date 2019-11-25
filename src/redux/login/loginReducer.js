@@ -1,5 +1,5 @@
-import { combineReducers } from "redux";
-import * as types from "./loginTypes";
+import { combineReducers } from 'redux';
+import * as types from './loginTypes';
 
 const loginTokenReducer = (state = null, { type, payload }) => {
   switch (type) {
@@ -45,5 +45,5 @@ export default combineReducers({
   loginToken: loginTokenReducer,
   fetchingNow: fetchingNowReducer,
   happenedError: happenedErrorReducer,
-  makedMistake: makedMistakeReducer
+  makedMistake: makedMistakeReducer,
 });

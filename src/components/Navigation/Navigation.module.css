@@ -1,5 +1,4 @@
 .navigation {
-  /* background: linear-gradient(90deg, #f2994a, #f2c94c); */
   background: linear-gradient(90deg, #325262, #19272f);
   padding: 10px 0;
 }
@@ -19,7 +18,5 @@
 }
 .link.linkActive {
   color: #000;
-  /* background: rgb(255, 255, 255, 1); */
-  /* border-radius: 25px; */
   background: #fdd700;
 }

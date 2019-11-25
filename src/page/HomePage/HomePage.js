@@ -1,8 +1,9 @@
 /* import - node_modules */
-import React from "react";
+import React from 'react';
+import T from 'prop-types';
 /* import - COMPONENT */
-import Paginator from "../../components/Paginator/Paginator";
-import ListTasks from "./ListTasks/ListTasks";
+import Paginator from '../../components/Paginator/Paginator';
+import ListTasks from './ListTasks/ListTasks';
 
 /*
  * COMPONENT
@@ -15,7 +16,7 @@ const HomePage = ({
   finishToken,
   happenedError,
   getTasksThunk,
-  changeTaskThunk
+  changeTaskThunk,
 }) => (
   <>
     <ListTasks
@@ -34,5 +35,23 @@ const HomePage = ({
     />
   </>
 );
+
+HomePage.defaultProps = {
+  finishToken: null,
+  happenedError: null,
+  loginToken: null,
+};
+
+HomePage.propTypes = {
+  listTasks: T.arrayOf(T.shape).isRequired,
+  totalCountTasks: T.number.isRequired,
+  loginToken: T.string,
+  fetchingNow: T.bool.isRequired,
+  finishToken: T.shape(),
+  happenedError: T.shape(),
+
+  getTasksThunk: T.func.isRequired,
+  changeTaskThunk: T.func.isRequired,
+};
 
 export default HomePage;

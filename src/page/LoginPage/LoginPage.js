@@ -1,15 +1,17 @@
 /* import - node_modules */
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import shortid from "shortid";
-import { toast } from "react-toastify";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import shortid from 'shortid';
+import { toast } from 'react-toastify';
+import T from 'prop-types';
 /* import - CSS */
-import "react-toastify/dist/ReactToastify.css";
-import styles from "./LoginPage.module.css";
+import 'react-toastify/dist/ReactToastify.css';
+import styles from './LoginPage.module.css';
 /* import - selectors */
-import loginSelectors from "../../redux/login/loginSelectors";
+import loginSelectors from '../../redux/login/loginSelectors';
 /* import - THUNK */
-import { loginingThunk } from "../../redux/login/loginThunk";
+// import { loginingThunk } from '../../redux/login/loginThunk';
+import thunk from '../../redux/login/loginThunk';
 
 toast.configure();
 
@@ -17,14 +19,28 @@ toast.configure();
  * COMPONENT
  */
 class LoginPage extends Component {
+  static defaultProps = {
+    loginToken: null,
+    happenedError: null,
+    makedMistake: null,
+  };
+
+  static propTypes = {
+    fetchingNow: T.bool.isRequired,
+    loginToken: T.string,
+    happenedError: T.shape(),
+    makedMistake: T.shape(),
+    loginingThunk: T.func.isRequired,
+  };
+
   state = {
-    login: "",
-    password: ""
+    login: '',
+    password: '',
   };
 
   inputIds = {
     loginInputId: shortid.generate(),
-    passwordInputId: shortid.generate()
+    passwordInputId: shortid.generate(),
   };
 
   componentDidUpdate(prevProps) {
@@ -58,18 +74,20 @@ class LoginPage extends Component {
   };
 
   missingField = () => {
-    toast.warn("Все поля обезательные", {
-      position: toast.POSITION.BOTTOM_RIGHT
+    toast.warn('Все поля обезательные', {
+      position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
+
   makedMistake = makedMistake => {
     toast.warn(`${makedMistake}`, {
-      position: toast.POSITION.BOTTOM_RIGHT
+      position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
+
   errorShow = () => {
-    toast.error("Произошла ошибка... Попробуйте позде", {
-      position: toast.POSITION.BOTTOM_RIGHT
+    toast.error('Произошла ошибка... Попробуйте позде', {
+      position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
 
@@ -81,7 +99,7 @@ class LoginPage extends Component {
     return (
       <section className={styles.section}>
         <h2 className={loginToken && styles.titleInside}>
-          {loginToken ? "Вошли=)" : "Войти:"}
+          {loginToken ? 'Вошли=)' : 'Войти:'}
         </h2>
 
         {!loginToken && (
@@ -128,7 +146,11 @@ const mapStateToProps = state => ({
   loginToken: loginSelectors.getLoginToken(state),
   fetchingNow: loginSelectors.getIsFetching(state),
   makedMistake: loginSelectors.getMakedMistake(state),
-  happenedError: loginSelectors.getError(state)
+  happenedError: loginSelectors.getError(state),
 });
+
+// export default connect(mapStateToProps, { loginingThunk })(LoginPage);
+
+const { loginingThunk } = thunk;
 
 export default connect(mapStateToProps, { loginingThunk })(LoginPage);

@@ -1,11 +1,11 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
-import homePageReducer from "./homePage/homePageReducer";
-import formPageReducer from "./form/formReducer";
-import loginPageReducer from "./login/loginReducer";
+import homePageReducer from './homePage/homePageReducer';
+import formPageReducer from './form/formReducer';
+import loginPageReducer from './login/loginReducer';
 
 export default combineReducers({
   homePage: homePageReducer,
   loginPage: loginPageReducer,
-  formPage: formPageReducer
+  formPage: formPageReducer,
 });

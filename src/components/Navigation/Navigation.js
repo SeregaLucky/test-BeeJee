@@ -1,10 +1,10 @@
 /* import - node_modules */
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 /* import - CSS */
-import styles from "./Navigation.module.css";
+import styles from './Navigation.module.css';
 /* import - routes */
-import routes from "../../routes";
+import routes from '../../routes';
 
 const Navigation = () => (
   <nav className={styles.navigation}>

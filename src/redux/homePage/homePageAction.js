@@ -1,11 +1,11 @@
-import * as types from "./homePageTypes";
+import * as types from './homePageTypes';
 
 export const getTasksAC = tasks => ({
   type: types.GET_TASKS,
 
   payload: {
-    tasks
-  }
+    tasks,
+  },
 });
 
 export const changeTaskAC = (id, text, status) => ({
@@ -14,38 +14,38 @@ export const changeTaskAC = (id, text, status) => ({
   payload: {
     id,
     text,
-    status
-  }
+    status,
+  },
 });
 
 export const getCountTasksAC = count => ({
   type: types.GET_COUNT_TASKS,
 
   payload: {
-    count
-  }
+    count: Number(count),
+  },
 });
 
 export const fetchingNowAC = fetchingNow => ({
   type: types.FETCHING_NOW,
 
   payload: {
-    fetchingNow
-  }
+    fetchingNow,
+  },
 });
 
 export const makedMistakeAC = finishToken => ({
   type: types.FINISH_TOKEN,
 
   payload: {
-    finishToken: { finishToken }
-  }
+    finishToken: { finishToken },
+  },
 });
 
 export const happenedErrorAC = isError => ({
   type: types.HAPPENED_ERROR,
 
   payload: {
-    isError: { isError }
-  }
+    isError: { isError },
+  },
 });

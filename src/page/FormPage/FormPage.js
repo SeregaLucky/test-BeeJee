@@ -1,15 +1,17 @@
 /* import - node_modules */
-import React, { Component } from "react";
-import shortid from "shortid";
-import { connect } from "react-redux";
-import { toast } from "react-toastify";
+import React, { Component } from 'react';
+import shortid from 'shortid';
+import { connect } from 'react-redux';
+import T from 'prop-types';
+import { toast } from 'react-toastify';
 /* import - CSS */
-import "react-toastify/dist/ReactToastify.css";
-import styles from "./FormPage.module.css";
+import 'react-toastify/dist/ReactToastify.css';
+import styles from './FormPage.module.css';
 /* import - selectors */
-import formSelectors from "../../redux/form/formSelectors";
+import formSelectors from '../../redux/form/formSelectors';
 /* import - THUNK */
-import { addNewTaskThunk } from "../../redux/form/formThunk";
+// import { addNewTaskThunk } from '../../redux/form/formThunk';
+import thunk from '../../redux/form/formThunk';
 
 toast.configure();
 
@@ -17,16 +19,28 @@ toast.configure();
  * COMPONENT
  */
 class FormPage extends Component {
+  static defaultProps = {
+    newTask: null,
+    happenedError: null,
+  };
+
+  static propTypes = {
+    newTask: T.shape(),
+    fetchingNow: T.bool.isRequired,
+    happenedError: T.shape(),
+    addNewTaskThunk: T.func.isRequired,
+  };
+
   state = {
-    username: "",
-    email: "",
-    text: ""
+    username: '',
+    email: '',
+    text: '',
   };
 
   inputIds = {
     usernameInputId: shortid.generate(),
     emailInputId: shortid.generate(),
-    textInputId: shortid.generate()
+    textInputId: shortid.generate(),
   };
 
   componentDidUpdate(prevProps) {
@@ -61,7 +75,7 @@ class FormPage extends Component {
       return;
     }
 
-    if (!email.includes("@") || !email.includes(".")) {
+    if (!email.includes('@') || !email.includes('.')) {
       this.notValidation();
       return;
     }
@@ -69,35 +83,39 @@ class FormPage extends Component {
     addNewTaskThunk(username, email, text);
 
     this.setState({
-      username: "",
-      email: "",
-      text: ""
+      username: '',
+      email: '',
+      text: '',
     });
   };
 
   addNewTask = () => {
-    toast.info("Новая задача добавлена!)", {
-      position: toast.POSITION.BOTTOM_RIGHT
+    toast.info('Новая задача добавлена!)', {
+      position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
+
   makedMistake = () => {
-    toast.warn("Заполните все поля", {
-      position: toast.POSITION.BOTTOM_RIGHT
+    toast.warn('Заполните все поля', {
+      position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
+
   makedMistake = () => {
-    toast.warn("Заполните все поля", {
-      position: toast.POSITION.BOTTOM_RIGHT
+    toast.warn('Заполните все поля', {
+      position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
+
   notValidation = () => {
-    toast.warn("Не прошли на вволидацию", {
-      position: toast.POSITION.BOTTOM_RIGHT
+    toast.warn('Не прошли на вволидацию', {
+      position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
+
   errorShow = () => {
-    toast.error("Произошла ошибка... Попробуйте позде", {
-      position: toast.POSITION.BOTTOM_RIGHT
+    toast.error('Произошла ошибка... Попробуйте позде', {
+      position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
 
@@ -156,7 +174,9 @@ class FormPage extends Component {
 const mapStateToProps = state => ({
   newTask: formSelectors.getNewTask(state),
   fetchingNow: formSelectors.getIsFetching(state),
-  happenedError: formSelectors.getError(state)
+  happenedError: formSelectors.getError(state),
 });
 
+// export default connect(mapStateToProps, { addNewTaskThunk })(FormPage);
+const { addNewTaskThunk } = thunk;
 export default connect(mapStateToProps, { addNewTaskThunk })(FormPage);

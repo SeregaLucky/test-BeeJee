@@ -1,33 +1,33 @@
-import * as types from "./loginTypes";
+import * as types from './loginTypes';
 
 export const getTokenAC = token => ({
   type: types.GET_TOKEN,
 
   payload: {
-    token
-  }
+    token,
+  },
 });
 
 export const fetchingNowAC = fetchingNow => ({
   type: types.FETCHING_NOW,
 
   payload: {
-    fetchingNow
-  }
+    fetchingNow,
+  },
 });
 
 export const makedMistakeAC = makedMistake => ({
   type: types.MAKED_MISTAKE,
 
   payload: {
-    makedMistake: { makedMistake }
-  }
+    makedMistake: { makedMistake },
+  },
 });
 
 export const happenedErrorAC = isError => ({
   type: types.HAPPENED_ERROR,
 
   payload: {
-    isError: { isError }
-  }
+    isError: { isError },
+  },
 });

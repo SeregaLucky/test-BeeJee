@@ -1,5 +1,5 @@
-import { combineReducers } from "redux";
-import * as types from "./formTypes";
+import { combineReducers } from 'redux';
+import * as types from './formTypes';
 
 const itemsReducer = (state = null, { type, payload }) => {
   switch (type) {
@@ -34,5 +34,5 @@ const happenedErrorReducer = (state = null, { type, payload }) => {
 export default combineReducers({
   newTask: itemsReducer,
   fetchingNow: fetchingNowReducer,
-  happenedError: happenedErrorReducer
+  happenedError: happenedErrorReducer,
 });
