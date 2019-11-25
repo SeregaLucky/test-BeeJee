@@ -9,7 +9,7 @@ import styles from "./FormPage.module.css";
 /* import - selectors */
 import formSelectors from "../../redux/form/formSelectors";
 /* import - THUNK */
-import { addNewTaskThunk } from "../../redux/form/formNewReducer2";
+import { addNewTaskThunk } from "../../redux/form/formThunk";
 /* import - COMPONENT */
 
 toast.configure();
@@ -58,18 +58,14 @@ class FormPage extends Component {
 
     if (!isUsername || !isEmail || !isText) {
       this.makedMistake();
-      console.log("Заполните все поля");
 
       return;
     }
 
     if (!email.includes("@") || !email.includes(".")) {
-      console.log("не прошли на вволидацию");
       this.notValidation();
       return;
     }
-
-    console.log(this.state);
 
     addNewTaskThunk(username, email, text);
 
@@ -165,17 +161,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { addNewTaskThunk })(FormPage);
-
-{
-  /* <label htmlFor={statusInputId} className={styles.label}>
-          <span>Статус задачи - в процессе</span>
-          <input
-            type="checkbox"
-            name="status"
-            // value={text}
-            // onChange={this.handleChange}
-            disabled={true}
-            id={statusInputId}
-          />
-        </label> */
-}

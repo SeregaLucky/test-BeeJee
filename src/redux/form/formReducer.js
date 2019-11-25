@@ -4,7 +4,6 @@ import * as types from "./formType";
 const itemsReducer = (state = null, { type, payload }) => {
   switch (type) {
     case types.ADD_NEW_TASK:
-      console.log(payload.task);
       return payload.task;
 
     default:
