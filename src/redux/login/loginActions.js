@@ -1,10 +1,10 @@
-import * as types from "./formTypes";
+import * as types from "./loginTypes";
 
-export const addNewTaskAC = task => ({
-  type: types.ADD_NEW_TASK,
+export const getTokenAC = token => ({
+  type: types.GET_TOKEN,
 
   payload: {
-    task
+    token
   }
 });
 
@@ -13,6 +13,14 @@ export const fetchingNowAC = fetchingNow => ({
 
   payload: {
     fetchingNow
+  }
+});
+
+export const makedMistakeAC = makedMistake => ({
+  type: types.MAKED_MISTAKE,
+
+  payload: {
+    makedMistake: { makedMistake }
   }
 });
 

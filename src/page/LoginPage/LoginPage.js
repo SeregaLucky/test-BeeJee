@@ -9,7 +9,9 @@ import styles from "./LoginPage.module.css";
 /* import - selectors */
 import loginSelectors from "../../redux/login/loginSelectors";
 /* import - THUNK */
-import { loginingThunk } from "../../redux/login/loginReducer";
+// import { loginingThunk } from "../../redux/login/loginReducer2";
+// import { loginingThunk } from "../../redux/login/loginReducer";
+import { loginingThunk } from "../../redux/login/loginThunk";
 /* import - COMPONENT */
 
 toast.configure();

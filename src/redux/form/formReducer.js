@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import * as types from "./formType";
+import * as types from "./formTypes";
 
 const itemsReducer = (state = null, { type, payload }) => {
   switch (type) {
