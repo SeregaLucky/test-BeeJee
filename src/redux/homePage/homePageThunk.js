@@ -1,7 +1,6 @@
 import { homePageAPI } from '../../api/api';
 import * as AC from './homePageAction';
 
-// export const getTasksThunk = (page, sortField, sortDirection) => dispatch => {
 const getTasksThunk = (page, sortField, sortDirection) => dispatch => {
   dispatch(AC.fetchingNowAC(true));
 
@@ -17,15 +16,12 @@ const getTasksThunk = (page, sortField, sortDirection) => dispatch => {
     .finally(() => dispatch(AC.fetchingNowAC(false)));
 };
 
-// export const changeTaskThunk = (id, text, status, token) => dispatch => {
 const changeTaskThunk = (id, text, status, token) => dispatch => {
   dispatch(AC.fetchingNowAC(true));
 
-  // status = status ? 10 : 0;
   const makeNumberStatus = status ? 10 : 0;
 
   homePageAPI
-    // .changeTask(id, text, status, token)
     .changeTask(id, text, makeNumberStatus, token)
     .then(res => {
       if (res.status === 'ok') {

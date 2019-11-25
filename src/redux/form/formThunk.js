@@ -1,7 +1,6 @@
 import { homePageAPI } from '../../api/api';
 import * as AC from './formActions';
 
-// export const addNewTaskThunk = (username, email, text) => dispatch => {
 const addNewTaskThunk = (username, email, text) => dispatch => {
   dispatch(AC.fetchingNowAC(true));
 

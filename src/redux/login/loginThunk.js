@@ -1,7 +1,6 @@
 import { loginPageAPI } from '../../api/api';
 import * as AC from './loginActions';
 
-// export const loginingThunk = (username, password) => dispatch => {
 const loginingThunk = (username, password) => dispatch => {
   dispatch(AC.fetchingNowAC(true));
 

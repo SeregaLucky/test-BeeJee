@@ -10,7 +10,6 @@ import styles from './FormPage.module.css';
 /* import - selectors */
 import formSelectors from '../../redux/form/formSelectors';
 /* import - THUNK */
-// import { addNewTaskThunk } from '../../redux/form/formThunk';
 import thunk from '../../redux/form/formThunk';
 
 toast.configure();
@@ -108,7 +107,7 @@ class FormPage extends Component {
   };
 
   notValidation = () => {
-    toast.warn('Не прошли на вволидацию', {
+    toast.warn('Email не валиден', {
       position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
@@ -177,6 +176,6 @@ const mapStateToProps = state => ({
   happenedError: formSelectors.getError(state),
 });
 
-// export default connect(mapStateToProps, { addNewTaskThunk })(FormPage);
 const { addNewTaskThunk } = thunk;
+
 export default connect(mapStateToProps, { addNewTaskThunk })(FormPage);

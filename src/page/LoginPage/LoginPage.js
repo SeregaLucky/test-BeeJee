@@ -10,7 +10,6 @@ import styles from './LoginPage.module.css';
 /* import - selectors */
 import loginSelectors from '../../redux/login/loginSelectors';
 /* import - THUNK */
-// import { loginingThunk } from '../../redux/login/loginThunk';
 import thunk from '../../redux/login/loginThunk';
 
 toast.configure();
@@ -148,8 +147,6 @@ const mapStateToProps = state => ({
   makedMistake: loginSelectors.getMakedMistake(state),
   happenedError: loginSelectors.getError(state),
 });
-
-// export default connect(mapStateToProps, { loginingThunk })(LoginPage);
 
 const { loginingThunk } = thunk;
 
