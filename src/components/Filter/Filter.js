@@ -12,12 +12,6 @@ class Filter extends Component {
     const { location, getTasksThunk } = this.props;
 
     /* Находим параметры запроса */
-    // const page = new URLSearchParams(location.search).get("page");
-    // const sortField = new URLSearchParams(location.search).get("sort_field");
-    // const sortDirection = new URLSearchParams(location.search).get(
-    //   "sort_direction"
-    // );
-
     const page = this.findParams(location.search).page;
     const sortField = this.findParams(location.search).sortField;
     const sortDirection = this.findParams(location.search).sortDirection;
@@ -54,21 +48,12 @@ class Filter extends Component {
     const { history, location, getTasksThunk } = this.props;
     const { fieldSort } = this.state;
 
-    // const sortFieldPrev = new URLSearchParams(prevState.fieldSort).get(
-    //   "sort_field"
-    // );
-    // const sortDirectionPrev = new URLSearchParams(prevState.fieldSort).get(
-    //   "sort_direction"
-    // );
-
+    /* Находим старые параметры запроса */
     const sortFieldPrev = this.findParams(prevState.fieldSort).sortField;
     const sortDirectionPrev = this.findParams(prevState.fieldSort)
       .sortDirection;
 
-    // const page = new URLSearchParams(location.search).get("page");
-    // const sortField = new URLSearchParams(fieldSort).get("sort_field");
-    // const sortDirection = new URLSearchParams(fieldSort).get("sort_direction");
-
+    /* Находим параметры запроса */
     const page = this.findParams(location.search).page;
     const sortField = this.findParams(fieldSort).sortField;
     const sortDirection = this.findParams(fieldSort).sortDirection;
@@ -99,30 +84,12 @@ class Filter extends Component {
   }
 
   findParams = params => {
-    // const { location } = this.props;
-    // const { fieldSort } = this.state;
-
     const page = new URLSearchParams(params).get("page");
     const sortField = new URLSearchParams(params).get("sort_field");
     const sortDirection = new URLSearchParams(params).get("sort_direction");
 
     return { page, sortField, sortDirection };
   };
-
-  // const page = new URLSearchParams(location.search).get("page");
-  // const sortField = new URLSearchParams(fieldSort).get("sort_field");
-  // const sortDirection = new URLSearchParams(fieldSort).get("sort_direction");
-
-  //   findParams = () => {
-  //     const { location } = this.props;
-  //     const { fieldSort } = this.state;
-
-  //     const page = new URLSearchParams(location.search).get("page");
-  //     const sortField = new URLSearchParams(fieldSort).get("sort_field");
-  //     const sortDirection = new URLSearchParams(fieldSort).get("sort_direction");
-
-  //     return { page, sortField, sortDirection };
-  //   };
 
   handleChangeSelect = ({ target }) => {
     const { value } = target;
