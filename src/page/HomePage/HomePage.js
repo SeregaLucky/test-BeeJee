@@ -29,10 +29,12 @@ const HomePage = ({
       changeTaskThunk={changeTaskThunk}
     />
 
-    <Paginator
-      totalCountTasks={totalCountTasks}
-      getTasksThunk={getTasksThunk}
-    />
+    {listTasks.length > 0 && (
+      <Paginator
+        totalCountTasks={totalCountTasks}
+        getTasksThunk={getTasksThunk}
+      />
+    )}
   </>
 );
 
